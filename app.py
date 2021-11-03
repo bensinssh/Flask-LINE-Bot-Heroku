@@ -13,6 +13,10 @@ app = Flask(__name__)
 line_bot_api = LineBotApi(os.environ.get("CHANNEL_ACCESS_TOKEN"))
 handler = WebhookHandler(os.environ.get("CHANNEL_SECRET"))
 
+@app.route('/')
+def index():
+    return 'You call index()'
+
 @app.route("/callback", methods=['POST'])
 def callback():
     body = request.get_data(as_text=True)
@@ -34,18 +38,17 @@ def callback():
 
     return 'OK'
 
-'''
 def reply(intent,text,reply_token,id,disname):
     if intent == 'intent 5':
         text_message = TextSendMessage(text='ทดสอบสำเร็จ')
         line_bot_api.reply_message(reply_token,text_message)
 
 
-@handler.add(MessageEvent, message=TextMessage)
-def handle_message(event):
-    text = event.message.text #simplify for receove message
-    sender = event.source.user_id #get user_id
-    gid = event.source.sender_id #get group_id
+#@handler.add(MessageEvent, message=TextMessage)
+#def handle_message(event):
+#    text = event.message.text #simplify for receove message
+#    sender = event.source.user_id #get user_id
+#    gid = event.source.sender_id #get group_id
 #=========[ LEAVE GROUP OR ROOM ]==========
     if text == 'bye':
         if isinstance(event.source, SourceGroup):
