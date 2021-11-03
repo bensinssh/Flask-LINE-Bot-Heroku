@@ -13,23 +13,6 @@ app = Flask(__name__)
 line_bot_api = LineBotApi(os.environ.get("CHANNEL_ACCESS_TOKEN"))
 handler = WebhookHandler(os.environ.get("CHANNEL_SECRET"))
 
-
-@app.route("/", methods=["GET", "POST"])
-def callback():
-
-    if request.method == "GET":
-        return "Hello Heroku"
-    if request.method == "POST":
-        signature = request.headers["X-Line-Signature"]
-        body = request.get_data(as_text=True)
-
-        try:
-            handler.handle(body, signature)
-        except InvalidSignatureError:
-            abort(400)
-
-        return "OK"
-
 @app.route("/callback", methods=['POST'])
 def callback():
     body = request.get_data(as_text=True)
@@ -56,10 +39,6 @@ def reply(intent,text,reply_token,id,disname):
     if intent == 'intent 5':
         text_message = TextSendMessage(text='ทดสอบสำเร็จ')
         line_bot_api.reply_message(reply_token,text_message)
-
-if __name__ == "__main__":
-    app.run()
-
 
 
 @handler.add(MessageEvent, message=TextMessage)
