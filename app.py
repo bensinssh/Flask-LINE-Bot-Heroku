@@ -34,7 +34,7 @@ def callback():
 
     return 'OK'
 
-
+''''
 def reply(intent,text,reply_token,id,disname):
     if intent == 'intent 5':
         text_message = TextSendMessage(text='ทดสอบสำเร็จ')
@@ -214,7 +214,7 @@ def handle_message(event):
             message
         )
 
-
+''​'
 if __name__ == '__main__':
     port = int(os.getenv('PORT', 5000))
     app.run(host='0.0.0.0', port=port)
