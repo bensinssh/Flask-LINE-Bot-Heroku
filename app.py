@@ -34,7 +34,7 @@ def callback():
 
     return 'OK'
 
-''''
+'''
 def reply(intent,text,reply_token,id,disname):
     if intent == 'intent 5':
         text_message = TextSendMessage(text='ทดสอบสำเร็จ')
